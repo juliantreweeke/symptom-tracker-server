@@ -1,15 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const AccountsSchema = require("../account/AccountsSchema");
-const { SEX } = require("./constants");
-
+const { GENDER } = require("./constants");
 
 const ClientSchema = new Schema(
   {  
-    accounts: {
-      type: [AccountsSchema],
-      required: true
-    },
     clinician: {
       type: Schema.Types.ObjectId,
       ref: 'Clinician',
@@ -17,28 +11,25 @@ const ClientSchema = new Schema(
     },
     DOB: {
       type: Date,
-      required: false
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    firstName: {
-      type: String,
       required: true
     },
-    lastName: {
+    mobile: {
       type: String,
-      required: true
+      required: false,
     },
     notes: {
       type: String,
       required: false
     }, 
-    sex: {
+    gender: {
       type: String,
       required: true,
-      enum: Object.values(SEX),
+      enum: Object.values(GENDER),
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
     },
   },
   {

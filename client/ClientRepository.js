@@ -10,7 +10,6 @@ const ClientRepository = ({ ClientModel }) => {
   const createClient = async (data) => {
     const client = new ClientModel(data);
     await client.save();
-    console.log(client);
 
     return ClinicianModel.findOneAndUpdate(
       { _id: client.clinician },
