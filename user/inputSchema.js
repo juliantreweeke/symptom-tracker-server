@@ -5,10 +5,21 @@ const { USER_TYPE } = require("./constants");
 const validateSchema = require("../utils/validateSchema");
 
 const baseSchema = {
-  email: Joi.string().required(),
+  email: Joi.string().email().required(),
+  password: Joi.string().required(),
+};
+
+const registerSchema = {
+  ...baseSchema,
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
+  userType: Joi.string()
+  .valid(...Object.keys(USER_TYPE))
+  .required(),
 };
 
 module.exports = {
-  createSchema: validateSchema(baseSchema)
+  loginSchema: validateSchema(baseSchema),
+  registerSchema: validateSchema(registerSchema)
 };
 

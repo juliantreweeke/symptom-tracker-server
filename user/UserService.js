@@ -3,9 +3,6 @@ const UserRepositoryInst = require("./UserRepository");
 const UserService = ({ UserRepository }) => {
 
   const createUser = async body => {
-    // TO DO CHECK FOR EXISTING EMAIL
-    // const existingUser = getUser()
-
     return UserRepository.createUser(body);
   }
 
@@ -21,6 +18,10 @@ const UserService = ({ UserRepository }) => {
     return UserRepository.getUser(id);
   };
 
+  const getUserByEmail = async email => {
+    return UserRepository.getUserByEmail(email);
+  }
+
   const getAllUsers = async () => {
     return UserRepository.getAllUsers();
   };
@@ -34,6 +35,7 @@ const UserService = ({ UserRepository }) => {
     deleteUser,
     getAllUsers,
     getUser,
+    getUserByEmail,
     loginUser,
     updateUser,
   };

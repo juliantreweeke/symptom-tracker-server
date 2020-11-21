@@ -7,20 +7,16 @@ const UserRepository = ({ UserModel }) => {
    * @returns {object} A new user
    */
   const createUser = async (data) => {
-    //TODO check if email already exists
-    // if (isUser.length >= 1) {
-    //   return res.status(409).json({
-    //     message: "email already in use"
-    //   });
-    // }
     const user = new UserModel({
-      name: data.name,
       email: data.email,
-      password: data.password
+      firstName: data.firstName,
+      lastName: data.lastName,
+      password: data.password,
+      userType: data.userType
     });
     const userData = await user.save();
     const token = await user.generateAuthToken(); // here it is calling the method 
-    return {userData, token}
+    return { userData, token }
   };
 
   /**
@@ -48,6 +44,17 @@ const UserRepository = ({ UserModel }) => {
       });
   };
 
+  const getUserByEmail = async (email) => {
+    return UserModel.find({email})
+      .then((user) => {
+        console.log("USER",user);
+        if (!user) {
+          return null;
+        }
+        return user;
+      });
+  };
+
   const getAllUsers = () => {
     return UserModel.find().then((users) => {
       if (!users) {
@@ -68,6 +75,7 @@ const UserRepository = ({ UserModel }) => {
 
   const loginUser = async (data) => {
     const user = await UserModel.findByCredentials(data.email, data.password);
+    console.log(data, user);
     if (!user) {
       return null;
     }
@@ -80,6 +88,7 @@ const UserRepository = ({ UserModel }) => {
     deleteUser,
     loginUser,
     getUser,
+    getUserByEmail,
     getAllUsers,
     updateUser,
   };

@@ -1,7 +1,7 @@
 const expressInst = require("express");
 const UserController = require("./UserController");
 const auth = require("../config/auth");
-const { createSchema } = require('./inputSchema');
+const { loginSchema, registerSchema } = require('./inputSchema');
 
 const ExpressRoutes = ({ express }) => {
   const router = express.Router();
@@ -10,8 +10,8 @@ const ExpressRoutes = ({ express }) => {
   router.get("/:id", UserController.getUser);
   router.patch("/:id", UserController.updateUser);
   router.delete("/:id", UserController.deleteUser);
-  router.post("/register", UserController.createUser);
-  router.post("/login", UserController.loginUser);
+  router.post("/register", registerSchema, UserController.createUser);
+  router.post("/login", loginSchema, UserController.loginUser);
 
   return router;
 };

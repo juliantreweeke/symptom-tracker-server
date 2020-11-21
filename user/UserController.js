@@ -30,7 +30,7 @@ const UserController = ({ UserService }) => {
    *
    * @param {object} req
    * @param {object} res
-   * @returns {object} One user 
+   * @returns {object} One user
    */
 
   const getUser = async (req, res) => {
@@ -109,11 +109,19 @@ const UserController = ({ UserService }) => {
 
   const createUser = async (req, res) => {
     const { body } = req;
+
+    const user = await UserService.getUserByEmail(body.email);
+    if (user.length) {
+      return res.status(409).json({
+        message: "email already in use",
+      });
+    }
+
     try {
       const user = await UserService.createUser(body);
       return res.status(201).send(user);
     } catch (err) {
-      res.status(400).send(`Error: ${err}`);
+      res.status(409).send(`Error: ${err}`);
     }
   };
 
@@ -123,13 +131,10 @@ const UserController = ({ UserService }) => {
       const user = await UserService.loginUser(body);
       return res.status(201).send(user);
     } catch (err) {
-      return res.status(401).json({ error: "Login failed! Check authentication credentials" })
+      return res.status(401).send(`Error: ${err}`);
     }
   };
 
-
-  // exports.loginUser = async (req, res) => {};
-  // exports.getUserDetails = async (req, res) => {};
 
   return {
     createUser,

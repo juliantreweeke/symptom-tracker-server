@@ -3,19 +3,26 @@ const Schema = mongoose.Schema;
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { USER_TYPE } = require("./constants");
 
 const UserSchema = Schema({
-  name: {
+  firstName: {
     type: String,
-    required: [true, "Please Include your name"]
+  },
+  lastName: {
+    type: String,
   },
   email: {
     type: String,
-    required: [true, "Please Include your email"]
+    required: true,
   },
   password: {
     type: String,
-    required: [true, "Please Include your password"]
+    required: true,
+  },
+  userType: {
+    type: String,
+    enum: Object.values(USER_TYPE),
   },
   tokens: [
     {
@@ -39,7 +46,7 @@ UserSchema.pre("save", async function(next) {
 //this method generates an auth token for the user
 UserSchema.methods.generateAuthToken = async function() {
   const user = this;
-  const token = jwt.sign({ _id: user._id, name: user.name, email: user.email },
+  const token = jwt.sign({ _id: user._id, firstName: user.firstName, lastName: user.lastName, email: user.email },
   "secret");
   user.tokens = user.tokens.concat({ token });
   await user.save();
