@@ -3,7 +3,7 @@ const expressInst = require('express');
 const { routes: AsessmentRoutes } = require('./assessment');
 const { routes: ClinicianRoutes } = require('./clinician');
 const { routes: ClientRoutes } = require('./client');
-const { routes: UserRoutes } = require('./user');
+const UserRoutes = require('./user');
 
 const ExpressRoutes = ({ express }) => {
   const router = express.Router();
