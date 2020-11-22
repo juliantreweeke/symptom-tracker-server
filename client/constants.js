@@ -1,5 +1,5 @@
 module.exports = {
-    SEX: {
+    GENDER: {
       MALE: 'MALE',
       FEMALE: 'FEMALE',
       OTHER: 'OTHER',

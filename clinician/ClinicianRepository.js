@@ -6,9 +6,10 @@ const ClinicianRepository = ({ ClinicianModel }) => {
    * @param {object} data defines the data needed to create a clinician
    * @returns {object} A new clinician
    */
-  const createClinician = (data) => {
-      const clinician = new ClinicianModel(data);
-      return clinician.save();
+  const createClinician = async (data) => {
+      const clinician = await new ClinicianModel(data);
+      await clinician.save();
+      return clinician.populate("user");
   }
   
   /**
@@ -25,8 +26,8 @@ const ClinicianRepository = ({ ClinicianModel }) => {
     });
   };
 
-  const getClinician =  async (id) => {
-    return ClinicianModel.findById(id).populate('clients').then((clinician) => {
+  const getClinician = (id) => {
+    return ClinicianModel.findById(id).populate('user').populate('clients').then((clinician) => {
       if (!clinician) {
         return null;
       }
