@@ -14,8 +14,7 @@ const registerSchema = {
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
   userType: Joi.string()
-  .valid(...Object.keys(USER_TYPE))
-  .required(),
+  .valid(...Object.keys(USER_TYPE)),
 };
 
 module.exports = {
