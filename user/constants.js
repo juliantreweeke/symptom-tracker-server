@@ -1,7 +1,12 @@
 module.exports = {
-    USER_TYPE: {
-      ADMIN: 'ADMIN',
-      CLINICIAN: 'CLINICIAN',
-      CLIENT: 'CLIENT',
-    },
-  };
+  GENDER: {
+    MALE: "MALE",
+    FEMALE: "FEMALE",
+    OTHER: "OTHER",
+  },
+  ROLE: {
+    ADMIN: "ADMIN",
+    CLINICIAN: "CLINICIAN",
+    CLIENT: "CLIENT",
+  },
+};

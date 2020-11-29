@@ -1,6 +1,6 @@
 const expressInst = require('express');
 // eslint-disable-next-line import/no-unresolved
-const { routes: AsessmentRoutes } = require('./assessment');
+const AsessmentRoutes = require('./assessment');
 const { routes: ClinicianRoutes } = require('./clinician');
 const { routes: ClientRoutes } = require('./client');
 const UserRoutes = require('./user');

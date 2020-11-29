@@ -1,17 +1,19 @@
 const expressInst = require("express");
 const UserController = require("./UserController");
 const auth = require("../config/auth");
-const { loginSchema, registerSchema } = require('./inputSchema');
+const { createClinicianSchema, createClientSchema, loginSchema } = require('./inputSchema');
 
 const ExpressRoutes = ({ express }) => {
   const router = express.Router();
-  router.get("/me", auth, UserController.getUserDetails);
+  router.get("/auth", auth, UserController.getUserDetails);
   router.get("/", UserController.getAllUsers);
   router.get("/:id", UserController.getUser);
+  router.get("/clients/:id", UserController.getAllClientsById);
   router.patch("/:id", UserController.updateUser);
   router.delete("/:id", UserController.deleteUser);
-  router.post("/register", registerSchema, UserController.createUser);
   router.post("/login", loginSchema, UserController.loginUser);
+  router.post("/client", createClientSchema, UserController.createClient);
+  router.post("/register", createClinicianSchema, UserController.createClinician);
 
   return router;
 };

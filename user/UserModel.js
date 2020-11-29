@@ -2,27 +2,35 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { USER_TYPE } = require("./constants");
+const { GENDER, ROLE } = require("./constants");
 require("dotenv").config();
 
 const UserSchema = Schema({
+  clients: [
+    {
+      type: Schema.Types.ObjectId,
+    }
+  ],
+  email: {
+    type: String,
+    required: true,
+  },
   firstName: {
     type: String,
+    required: true,
   },
   lastName: {
-    type: String,
-  },
-  email: {
     type: String,
     required: true,
   },
   password: {
     type: String,
-    required: true,
+    required: false,
   },
-  userType: {
+  role: {
     type: String,
-    enum: Object.values(USER_TYPE),
+    enum: Object.values(ROLE),
+    required: true,
   },
   tokens: [
     {
@@ -32,6 +40,35 @@ const UserSchema = Schema({
       },
     },
   ],
+  businessName: {
+    type: String,
+    required: false,
+  },
+  imageURL: {
+    type: String,
+    required: false,
+  },
+  clinician: {
+    type: Schema.Types.ObjectId,
+    required: false,
+  },
+  DOB: {
+    type: Date,
+    required: false
+  },
+  mobile: {
+    type: String,
+    required: false,
+  },
+  notes: {
+    type: String,
+    required: false
+  }, 
+  gender: {
+    type: String,
+    required: false,
+    enum: Object.values(GENDER),
+  },
 });
 
 //this method will hash the password before saving the user model
@@ -52,6 +89,7 @@ UserSchema.methods.generateAuthToken = async function () {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      role: user.role
     },
     process.env.JWT_SECRET
   );
