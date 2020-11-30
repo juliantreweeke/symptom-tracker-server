@@ -110,9 +110,9 @@ const UserController = ({ UserRepository }) => {
    */
 
   const updateUser = async (req, res) => {
-    const { id, body } = req.params;
+    const { body } = req;
     try {
-      const user = await UserRepository.updateUser({ id, body });
+      const user = await UserRepository.updateUser({ id: body._id, body });
       if (isNil(user)) {
         return res.status(404).send("No user found");
       }

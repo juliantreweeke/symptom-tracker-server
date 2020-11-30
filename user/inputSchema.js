@@ -41,6 +41,5 @@ module.exports = {
   createClientSchema: validateSchema(createClientSchema),
   createClinicianSchema: validateSchema(createClinicianSchema),
   loginSchema: validateSchema(authSchema),
-  
 };
 

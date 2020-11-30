@@ -10,6 +10,7 @@ const ExpressRoutes = ({ express }) => {
   router.get("/:id", UserController.getUser);
   router.get("/clients/:id", UserController.getAllClientsById);
   router.patch("/:id", UserController.updateUser);
+  router.patch("/client/", UserController.updateUser);
   router.delete("/:id", UserController.deleteUser);
   router.post("/login", loginSchema, UserController.loginUser);
   router.post("/client", createClientSchema, UserController.createClient);
