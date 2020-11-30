@@ -9,4 +9,8 @@ module.exports = {
     CLINICIAN: "CLINICIAN",
     CLIENT: "CLIENT",
   },
+  STATUS: {
+    PENDING: "PENDING",
+    CONFIRMED: "CONFIRMED"
+  }
 };

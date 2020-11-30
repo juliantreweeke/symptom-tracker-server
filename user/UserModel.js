@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { GENDER, ROLE } = require("./constants");
+const { GENDER, ROLE, STATUS } = require("./constants");
 require("dotenv").config();
 
 const UserSchema = Schema({
@@ -69,6 +69,11 @@ const UserSchema = Schema({
     required: false,
     enum: Object.values(GENDER),
   },
+  status: {
+    type: String,
+    required: false,
+    enum: Object.values(STATUS),
+  }
 });
 
 //this method will hash the password before saving the user model
@@ -100,7 +105,6 @@ UserSchema.methods.generateAuthToken = async function () {
 
 //this method search for a user by email and password.
 UserSchema.statics.findByCredentials = async (email, password) => {
-  console.log(email, password);
 
   const user = await UserModel.findOne({ email });
   if (!user) {

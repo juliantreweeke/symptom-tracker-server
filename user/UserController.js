@@ -75,7 +75,7 @@ const UserController = ({ UserRepository }) => {
       if (isNil(user)) {
         return res.status(401).send("Unauthorized");
       }
-      return res.status(201).send(user);
+      return res.status(200);
     } catch (err) {
       res.status(500).send(`Error: ${err}`);
     }

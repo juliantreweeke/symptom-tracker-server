@@ -1,6 +1,6 @@
-const isNil = require('lodash.isnil');
+const isNil = require("lodash.isnil");
 const UserModelInst = require("./UserModel");
-const { ROLE } = require("./constants");
+const { ROLE, STATUS } = require("./constants");
 
 const UserRepository = ({ UserModel }) => {
   /**
@@ -14,11 +14,11 @@ const UserRepository = ({ UserModel }) => {
       firstName: data.firstName,
       lastName: data.lastName,
       password: data.password,
-      role: data.role
+      role: data.role,
     });
     const userData = await user.save();
-    const token = await user.generateAuthToken(); // here it is calling the method 
-    return { userData, token }
+    const token = await user.generateAuthToken(); // here it is calling the method
+    return { userData, token };
   };
 
   /**
@@ -27,8 +27,7 @@ const UserRepository = ({ UserModel }) => {
    * @returns {object} A new client
    */
   const createClient = async (data) => {
-    console.log('createCLient rpo data', data);
-    const client = new UserModel(data);
+    const client = new UserModel({ ...data, status: STATUS.PENDING });
     await client.save();
 
     await UserModel.findOneAndUpdate(
@@ -38,8 +37,6 @@ const UserRepository = ({ UserModel }) => {
     );
     return client;
   };
-
-
 
   /**
    * Deletes a user
@@ -68,14 +65,13 @@ const UserRepository = ({ UserModel }) => {
   };
 
   const getUserByEmail = async (email) => {
-    return UserModel.find({email})
-      .then((user) => {
-        console.log("USER",user);
-        if (isNil(user)) {
-          return null;
-        }
-        return user;
-      });
+    return UserModel.find({ email }).then((user) => {
+      console.log("USER", user);
+      if (isNil(user)) {
+        return null;
+      }
+      return user;
+    });
   };
 
   const getAllUsers = () => {
@@ -93,12 +89,12 @@ const UserRepository = ({ UserModel }) => {
    * @returns {Array} all of the clinicians clients
    */
   const getAllClientsById = async (id) => {
-      return UserModel.find({clinician: id}).then((users) => {
-        if (isNil(users)) {
-          return null;
-        }
-        return users;
-      });
+    return UserModel.find({ clinician: id }).then((users) => {
+      if (isNil(users)) {
+        return null;
+      }
+      return users;
+    });
   };
 
   const updateUser = ({ id, body }) => {
@@ -112,12 +108,13 @@ const UserRepository = ({ UserModel }) => {
 
   const loginUser = async (data) => {
     const user = await UserModel.findByCredentials(data.email, data.password);
+    
     console.log(data, user);
     if (isNil(user)) {
       return null;
     }
     const token = await user.generateAuthToken();
-    return {user, token};
+    return { user, token };
   };
 
   return {
