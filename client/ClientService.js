@@ -1,16 +1,15 @@
 const ClientRepositoryInst = require("./ClientRepository");
 
 const ClientService = ({ ClientRepository }) => {
-
-  const createClient = async body => {
+  const createClient = async (body) => {
     return ClientRepository.createClient(body);
-  }
+  };
 
-  const deleteClient = async id => {
+  const deleteClient = async (id) => {
     return ClientRepository.deleteClient(id);
   };
 
-  const getClient = async id => {
+  const getClient = async (id) => {
     return ClientRepository.getClient(id);
   };
 
@@ -18,26 +17,26 @@ const ClientService = ({ ClientRepository }) => {
     return ClientRepository.getAllClients();
   };
 
-  const updateClient = async ({id, body}) => {
-    ClientRepository.updateClient(id, body)
-  }
+  const updateClient = async ({ id, body }) => {
+    ClientRepository.updateClient(id, body);
+  };
 
   // TODO WHEN LOGIN AND AUTH EXISTS
-  const canUpdateClient  = async ({id, body}) => {
+  const canUpdateClient = async ({ id, body }) => {
     const client = await getClient(id);
 
     if (!client) {
       return {
-        errorHttpStatus: 'NOT_FOUND'
+        errorHttpStatus: "NOT_FOUND",
       };
     }
 
     const isCliniciansClient = client.clinician.id === user.id;
 
     return {
-      errorHttpStatus: !isCliniciansClient && 'FORBIDDEN'
+      errorHttpStatus: !isCliniciansClient && "FORBIDDEN",
     };
-  }
+  };
 
   return {
     createClient,
@@ -45,7 +44,7 @@ const ClientService = ({ ClientRepository }) => {
     getAllClients,
     getClient,
     updateClient,
-    canUpdateClient
+    canUpdateClient,
   };
 };
 

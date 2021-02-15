@@ -7,10 +7,10 @@ const AssessmentRepository = ({ AssessmentModel }) => {
    * @returns {object} A new assessment
    */
   const createAssessment = (data) => {
-      const assessment = new AssessmentModel(data);
-      return assessment.save();
-  }
-  
+    const assessment = new AssessmentModel(data);
+    return assessment.save();
+  };
+
   /**
    * Deletes a assessment
    * @param {string} id the id of the assessment
@@ -18,14 +18,14 @@ const AssessmentRepository = ({ AssessmentModel }) => {
    */
   const deleteAssessment = (id) => {
     return AssessmentModel.findByIdAndDelete(id).then((assessment) => {
-      if(!assessment){
-         return null;
+      if (!assessment) {
+        return null;
       }
       return assessment;
     });
   };
 
-  const getAssessment =  async (id) => {
+  const getAssessment = async (id) => {
     return AssessmentModel.findById(id).then((assessment) => {
       if (!assessment) {
         return null;
@@ -45,11 +45,11 @@ const AssessmentRepository = ({ AssessmentModel }) => {
 
   const updateAssessment = ({ id, body }) => {
     return AssessmentModel.findByIdAndUpdate(id, body).then((assessment) => {
-      if(!assessment){
+      if (!assessment) {
         return null;
       }
       return assessment;
-    })
+    });
   };
 
   return {

@@ -1,16 +1,15 @@
 const AssessmentRepositoryInst = require("./AssessmentRepository");
 
 const AssessmentService = ({ AssessmentRepository }) => {
-
-  const createAssessment = async body => {
+  const createAssessment = async (body) => {
     return AssessmentRepository.createAssessment(body);
-  }
+  };
 
-  const deleteAssessment = async id => {
+  const deleteAssessment = async (id) => {
     return AssessmentRepository.deleteAssessment(id);
   };
 
-  const getAssessment = async id => {
+  const getAssessment = async (id) => {
     return AssessmentRepository.getAssessment(id);
   };
 
@@ -18,16 +17,16 @@ const AssessmentService = ({ AssessmentRepository }) => {
     return AssessmentRepository.getAllAssessments();
   };
 
-  const updateAssessment = async ({id, body}) => {
-    AssessmentRepository.updateAssessment(id, body)
-  }
+  const updateAssessment = async ({ id, body }) => {
+    AssessmentRepository.updateAssessment(id, body);
+  };
 
   return {
     createAssessment,
     deleteAssessment,
     getAllAssessments,
     getAssessment,
-    updateAssessment
+    updateAssessment,
   };
 };
 

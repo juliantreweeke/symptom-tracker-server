@@ -15,10 +15,6 @@ const userSchema = {
   role: Joi.string().valid(...Object.keys(ROLE)).required(),
 }
 
-const registerSchema = {
-  
-};
-
 const createClinicianSchema = {
   ...authSchema,
   ...userSchema
