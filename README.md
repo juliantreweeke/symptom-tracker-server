@@ -15,7 +15,7 @@ In terms of pages the login, logout and layout is done.
 Before finishing other pages and starting on the UI, I am first Spiking out different graph libraries in the front end to see which one is ideal. I am after one that is mobile responsive and has annotation functionality.
 
 ## Technology
-Node
-MongoDB
-Vue
-Vuex
+* Node
+* MongoDB
+* Vue
+* Vuex
