@@ -30,7 +30,7 @@ const ClientController = ({ ClientService }) => {
    *
    * @param {object} req
    * @param {object} res
-   * @returns {object} One client 
+   * @returns {object} One client
    */
 
   const getClient = async (req, res) => {

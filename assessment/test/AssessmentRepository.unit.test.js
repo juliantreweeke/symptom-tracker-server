@@ -28,18 +28,4 @@ describe("AssessmentRepository", () => {
       });
     });
   });
-  describe("deleteAssessment", () => {
-    it("should call findByIdAndDelete method from the model and return assessment if id is valid", async () => {
-      const id = "assessmentId";
-      const assessment = "a assessment";
-      const AssessmentModelMock = stub();
-      AssessmentModelMock.findByIdAndDelete.resolves(assessment);
-      const AssessmentRepository = implementation({
-        AssessmentModel: AssessmentModelMock,
-      });
-      await AssessmentRepository.deleteAssessment(id);
-    //   expect(AssessmentModelMock.calledOnce).to.be.true;
-    //   expect(AssessmentModelMock).to.have.been.calledWith(assessment);
-    });
-  });
 });

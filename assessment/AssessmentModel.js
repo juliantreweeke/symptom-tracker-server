@@ -36,7 +36,6 @@ const AssessmentSchema = new Schema(
       type: Schema.Types.ObjectId,
       required: false,
     },
-
   },
   {
     timestamps: true,

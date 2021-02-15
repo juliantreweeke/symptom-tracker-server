@@ -30,7 +30,7 @@ const AssessmentController = ({ AssessmentService }) => {
    *
    * @param {object} req
    * @param {object} res
-   * @returns {object} One assessment 
+   * @returns {object} One assessment
    */
 
   const getAssessment = async (req, res) => {

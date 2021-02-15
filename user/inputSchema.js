@@ -1,24 +1,41 @@
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi)
-const { USER_TYPE } = require("./constants");
+const { GENDER, ROLE } = require("./constants");
 
 const validateSchema = require("../utils/validateSchema");
 
-const baseSchema = {
+const authSchema = {
   email: Joi.string().email().required(),
   password: Joi.string().required(),
 };
 
-const registerSchema = {
-  ...baseSchema,
+const userSchema = {
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
-  userType: Joi.string()
-  .valid(...Object.keys(USER_TYPE)),
-};
+  role: Joi.string().valid(...Object.keys(ROLE)).required(),
+}
+
+const createClinicianSchema = {
+  ...authSchema,
+  ...userSchema
+}
+
+const createClientSchema = {
+  clinician: Joi.objectId().required(),
+  DOB: Joi.date().required(),
+  email: Joi.string().email().required(),
+  notes: Joi.string(),
+  mobile: Joi.string().length(10).pattern(/^[0-9]+$/),
+  gender: Joi.string()
+  .valid(...Object.keys(GENDER))
+  .required(),
+  ...userSchema
+}
+
 
 module.exports = {
-  loginSchema: validateSchema(baseSchema),
-  registerSchema: validateSchema(registerSchema)
+  createClientSchema: validateSchema(createClientSchema),
+  createClinicianSchema: validateSchema(createClinicianSchema),
+  loginSchema: validateSchema(authSchema),
 };
 

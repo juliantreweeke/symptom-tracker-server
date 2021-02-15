@@ -3,15 +3,15 @@ const Schema = mongoose.Schema;
 const { GENDER } = require("./constants");
 
 const ClientSchema = new Schema(
-  {  
+  {
     clinician: {
       type: Schema.Types.ObjectId,
-      ref: 'Clinician',
+      ref: "Clinician",
       required: true,
     },
     DOB: {
       type: Date,
-      required: true
+      required: true,
     },
     mobile: {
       type: String,
@@ -19,8 +19,8 @@ const ClientSchema = new Schema(
     },
     notes: {
       type: String,
-      required: false
-    }, 
+      required: false,
+    },
     gender: {
       type: String,
       required: true,
@@ -28,7 +28,7 @@ const ClientSchema = new Schema(
     },
     user: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
   },
