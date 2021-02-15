@@ -1,7 +1,7 @@
 # Symptom Tracker
-This is a prototype of an app I am building.
+This is a prototype of an app I am building. There is a huge amount of work to do be done, and I am using this as a kind of sandbox to try out ideas.
 
-This is the BE repo, that is linked to this Front End Repo here:
+This is the Back End repo, that is linked to this Front End Repo here:
 https://github.com/juliantreweeke/symptom-tracker-client
 
 The idea of the app is a B2B platform where a Health Practitioner can monitor clients progress via stats gathered from questionairres that are email out to them on a timed interval.
